@@ -1,28 +1,314 @@
-<UI version="4.0" >
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
  <class>CompaniesCRUDRepositoryAppClass</class>
- <widget class="QMainWindow" name="CompaniesCRUDRepositoryAppClass" >
-  <property name="objectName" >
-   <string notr="true">CompaniesCRUDRepositoryAppClass</string>
-  </property>
-  <property name="geometry" >
+ <widget class="QMainWindow" name="CompaniesCRUDRepositoryAppClass">
+  <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>600</width>
+    <width>850</width>
     <height>400</height>
    </rect>
   </property>
-  <property name="windowTitle" >
+  <property name="windowTitle">
    <string>CompaniesCRUDRepositoryApp</string>
-  </property>  <widget class="QMenuBar" name="menuBar" />
-  <widget class="QToolBar" name="mainToolBar" />
-  <widget class="QWidget" name="centralWidget" />
-  <widget class="QStatusBar" name="statusBar" />
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <widget class="QWidget" name="layoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>20</y>
+      <width>831</width>
+      <height>311</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="hlMain" stretch="1,3">
+     <property name="spacing">
+      <number>10</number>
+     </property>
+     <item>
+      <layout class="QVBoxLayout" name="vlEditionBox">
+       <property name="spacing">
+        <number>10</number>
+       </property>
+       <property name="leftMargin">
+        <number>5</number>
+       </property>
+       <property name="topMargin">
+        <number>5</number>
+       </property>
+       <property name="rightMargin">
+        <number>5</number>
+       </property>
+       <property name="bottomMargin">
+        <number>5</number>
+       </property>
+       <item>
+        <layout class="QFormLayout" name="flFormBox">
+         <property name="horizontalSpacing">
+          <number>8</number>
+         </property>
+         <property name="verticalSpacing">
+          <number>8</number>
+         </property>
+         <property name="leftMargin">
+          <number>5</number>
+         </property>
+         <property name="topMargin">
+          <number>5</number>
+         </property>
+         <property name="rightMargin">
+          <number>5</number>
+         </property>
+         <property name="bottomMargin">
+          <number>5</number>
+         </property>
+         <item row="0" column="0">
+          <widget class="QLabel" name="lbName">
+           <property name="text">
+            <string>Nazwa</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLineEdit" name="lneName"/>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="lbID">
+           <property name="text">
+            <string>NIP</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="1">
+          <widget class="QLineEdit" name="lneID"/>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="lbPhone">
+           <property name="text">
+            <string>Nr Tel.</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QLineEdit" name="lnePhone"/>
+         </item>
+         <item row="3" column="0">
+          <widget class="QLabel" name="lbAddress">
+           <property name="text">
+            <string>Adres</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1">
+          <widget class="QLineEdit" name="lneAddress"/>
+         </item>
+         <item row="4" column="0">
+          <widget class="QLabel" name="lbEmail">
+           <property name="text">
+            <string>E-mail</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="1">
+          <widget class="QLineEdit" name="lneEmail"/>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="vlControlBox">
+         <property name="spacing">
+          <number>10</number>
+         </property>
+         <property name="leftMargin">
+          <number>5</number>
+         </property>
+         <property name="topMargin">
+          <number>5</number>
+         </property>
+         <property name="rightMargin">
+          <number>5</number>
+         </property>
+         <property name="bottomMargin">
+          <number>5</number>
+         </property>
+         <item>
+          <widget class="QPushButton" name="pbAdd">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Dodaj</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pbUpdate">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Aktualizuj</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pbDelete">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="MinimumExpanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Usuń</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QTableWidget" name="tabData">
+       <property name="editTriggers">
+        <set>QAbstractItemView::NoEditTriggers</set>
+       </property>
+       <property name="tabKeyNavigation">
+        <bool>false</bool>
+       </property>
+       <property name="selectionMode">
+        <enum>QAbstractItemView::SingleSelection</enum>
+       </property>
+       <property name="selectionBehavior">
+        <enum>QAbstractItemView::SelectRows</enum>
+       </property>
+       <property name="sortingEnabled">
+        <bool>true</bool>
+       </property>
+       <property name="cornerButtonEnabled">
+        <bool>false</bool>
+       </property>
+       <attribute name="horizontalHeaderStretchLastSection">
+        <bool>true</bool>
+       </attribute>
+       <row>
+        <property name="text">
+         <string>1</string>
+        </property>
+       </row>
+       <row>
+        <property name="text">
+         <string>2</string>
+        </property>
+       </row>
+       <column>
+        <property name="text">
+         <string>Nazwa firmy</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Numer NIP</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Numer telefonu</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Adres</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Adres e-mail</string>
+        </property>
+       </column>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>850</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuPlik">
+    <property name="title">
+     <string>Plik</string>
+    </property>
+    <addaction name="actionSave"/>
+    <addaction name="actionSaveAs"/>
+    <addaction name="actionRead"/>
+    <addaction name="actionClose"/>
+   </widget>
+   <addaction name="menuPlik"/>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QToolBar" name="mainToolBar">
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
+  <action name="actionSave">
+   <property name="text">
+    <string>Zapisz</string>
+   </property>
+  </action>
+  <action name="actionSaveAs">
+   <property name="text">
+    <string>Zapisz jako ...</string>
+   </property>
+  </action>
+  <action name="actionRead">
+   <property name="text">
+    <string>Wczytaj</string>
+   </property>
+  </action>
+  <action name="actionClose">
+   <property name="text">
+    <string>Zamknij</string>
+   </property>
+  </action>
  </widget>
- <layoutDefault spacing="6" margin="11" />
- <pixmapfunction></pixmapfunction>
+ <layoutdefault spacing="6" margin="11"/>
  <resources>
-   <include location="companiescrudrepositoryapp.qrc"/>
+  <include location="companiescrudrepositoryapp.qrc"/>
  </resources>
- <connections/>
-</UI>
+ <connections>
+  <connection>
+   <sender>actionClose</sender>
+   <signal>triggered()</signal>
+   <receiver>CompaniesCRUDRepositoryAppClass</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>424</x>
+     <y>199</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

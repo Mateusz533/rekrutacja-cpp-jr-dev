@@ -10,8 +10,20 @@
     <height>400</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="baseSize">
+   <size>
+    <width>850</width>
+    <height>400</height>
+   </size>
+  </property>
   <property name="windowTitle">
-   <string>CompaniesCRUDRepositoryApp</string>
+   <string>Companies Repository</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QWidget" name="layoutWidget">
@@ -82,7 +94,11 @@
           </widget>
          </item>
          <item row="1" column="1">
-          <widget class="QLineEdit" name="lneID"/>
+          <widget class="QLineEdit" name="lneID">
+           <property name="placeholderText">
+            <string>111-22-33-444</string>
+           </property>
+          </widget>
          </item>
          <item row="2" column="0">
           <widget class="QLabel" name="lbPhone">
@@ -92,7 +108,11 @@
           </widget>
          </item>
          <item row="2" column="1">
-          <widget class="QLineEdit" name="lnePhone"/>
+          <widget class="QLineEdit" name="lnePhone">
+           <property name="placeholderText">
+            <string>123456789</string>
+           </property>
+          </widget>
          </item>
          <item row="3" column="0">
           <widget class="QLabel" name="lbAddress">
@@ -112,7 +132,11 @@
           </widget>
          </item>
          <item row="4" column="1">
-          <widget class="QLineEdit" name="lneEmail"/>
+          <widget class="QLineEdit" name="lneEmail">
+           <property name="placeholderText">
+            <string>example@mysite.com</string>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>
@@ -178,6 +202,9 @@
      </item>
      <item>
       <widget class="QTableWidget" name="tabData">
+       <property name="focusPolicy">
+        <enum>Qt::NoFocus</enum>
+       </property>
        <property name="editTriggers">
         <set>QAbstractItemView::NoEditTriggers</set>
        </property>
@@ -199,16 +226,6 @@
        <attribute name="horizontalHeaderStretchLastSection">
         <bool>true</bool>
        </attribute>
-       <row>
-        <property name="text">
-         <string>1</string>
-        </property>
-       </row>
-       <row>
-        <property name="text">
-         <string>2</string>
-        </property>
-       </row>
        <column>
         <property name="text">
          <string>Nazwa firmy</string>

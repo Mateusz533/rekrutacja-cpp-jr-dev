@@ -71,11 +71,13 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="translations\en_EN.ts">
-      <Filter>Translation Files</Filter>
-    </None>
     <None Include="translations\pl_PL.ts">
       <Filter>Translation Files</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <QtTranslation Include="translations\en_EN.ts">
+      <Filter>Translation Files</Filter>
+    </QtTranslation>
   </ItemGroup>
 </Project>

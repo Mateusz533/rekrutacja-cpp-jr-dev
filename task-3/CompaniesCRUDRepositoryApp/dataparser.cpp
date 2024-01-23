@@ -6,8 +6,9 @@ constexpr auto NOT_DIGITS = [](const char& c) { return c < '0' || c > '9'; };
 CompanyEntity DataParser::trim(const CompanyEntity& data) {
 	auto arr{ data.toArray() };
 	for (auto& field : arr) {
-		const auto& offset{ field.find_first_not_of(' ') };
-		const auto& length{ field.find_last_not_of(' ') + 1 - offset };
+		const auto& first{ field.find_first_not_of(' ') };
+		const auto& offset{ first == std::string::npos ? 0 : first };
+		const auto& length{ first == std::string::npos ? 0 : field.find_last_not_of(' ') + 1 - offset };
 		field = field.substr(offset, length);
 	}
 	return CompanyEntity::fromArray(arr);

@@ -11,6 +11,11 @@ CompaniesCRUDRepositoryApp::CompaniesCRUDRepositoryApp(QWidget* parent)
 	connect(ui.actionSave, &QAction::trigger, this, &CompaniesCRUDRepositoryApp::on_actionSave_triggered);
 	connect(ui.actionSaveAs, &QAction::trigger, this, &CompaniesCRUDRepositoryApp::on_actionSaveAs_triggered);
 	connect(ui.actionRead, &QAction::trigger, this, &CompaniesCRUDRepositoryApp::on_actionRead_triggered);
+	connect(ui.actionPolish, &QAction::trigger, this, &CompaniesCRUDRepositoryApp::on_actionPolish_triggered);
+	connect(ui.actionEnglish, &QAction::trigger, this, &CompaniesCRUDRepositoryApp::on_actionEnglish_triggered);
+
+	const QString& locale{ QLocale::system().name() };
+	retranslateGUI((locale == "pl_PL" || locale == "en_EN") ? locale : "pl_PL");
 }
 
 CompaniesCRUDRepositoryApp::~CompaniesCRUDRepositoryApp()
@@ -75,6 +80,18 @@ std::array<QLineEdit*, FIELD_NUMER> CompaniesCRUDRepositoryApp::formFields() con
 	return std::array<QLineEdit*, FIELD_NUMER>({ ui.lneName, ui.lneID, ui.lnePhone, ui.lneAddress, ui.lneEmail });
 }
 
+void CompaniesCRUDRepositoryApp::retranslateGUI(const QString& language_code) {
+	const QString& file_name{ LANG_FILE_PREFIX + language_code };
+	QTranslator translator;
+	const bool& is_loaded_correctly{ translator.load(file_name, LANG_FILES_DIRECTORY) };
+	const bool& is_installed_correctly{ QCoreApplication::installTranslator(&translator) };
+
+	if(! is_loaded_correctly || !is_installed_correctly)
+		ui.statusBar->showMessage(tr("Fail to load translation!"));
+
+	ui.retranslateUi(this);
+}
+
 /*******************/
 /* All SLOTS BELOW */
 /*******************/
@@ -83,11 +100,11 @@ void CompaniesCRUDRepositoryApp::on_pbAdd_clicked() {
 	const auto& form_data{ getFormData() };
 
 	if (!DataParser::validateAll(form_data))
-		return ui.statusBar->showMessage("Invalid form data!");
+		return ui.statusBar->showMessage(tr("Invalid form data!"));
 
 	for (const auto& record : getTableData()) {
 		if (record.getId() == form_data.getId())
-			return ui.statusBar->showMessage("Duplicated ID!");
+			return ui.statusBar->showMessage(tr("Duplicated ID!"));
 	}
 
 	const int& row_number{ ui.tabData->rowCount() };
@@ -106,7 +123,7 @@ void CompaniesCRUDRepositoryApp::on_pbUpdate_clicked() {
 
 	const auto& form_data{ getFormData() };
 	if (!DataParser::validateAll(form_data))
-		return ui.statusBar->showMessage("Invalid form data!");
+		return ui.statusBar->showMessage(tr("Invalid form data!"));
 
 	const auto& selected_row{ selected_items.at(0)->row() };
 	const auto& selected_record{ getRecord(selected_row) };
@@ -114,7 +131,7 @@ void CompaniesCRUDRepositoryApp::on_pbUpdate_clicked() {
 
 	for (int i{ 0 }; i < records.size(); ++i) {
 		if (i != selected_row && records[i].getId() == form_data.getId())
-			return ui.statusBar->showMessage("Duplicated ID!");
+			return ui.statusBar->showMessage(tr("Duplicated ID!"));
 	}
 
 	setRecord(selected_row, form_data);
@@ -147,14 +164,14 @@ void CompaniesCRUDRepositoryApp::on_tabData_clicked() {
 
 void CompaniesCRUDRepositoryApp::on_actionSave_triggered() {
 	if (!m_persistance_controller->saveData(getTableData()))
-		ui.statusBar->showMessage("Incorrect file!");
+		ui.statusBar->showMessage(tr("Incorrect file!"));
 	else
 		ui.statusBar->clearMessage();
 }
 
 void CompaniesCRUDRepositoryApp::on_actionSaveAs_triggered() {
 	if (!m_persistance_controller->saveDataAs(getTableData()))
-		ui.statusBar->showMessage("Incorrect file!");
+		ui.statusBar->showMessage(tr("Incorrect file!"));
 	else
 		ui.statusBar->clearMessage();
 }
@@ -163,11 +180,19 @@ void CompaniesCRUDRepositoryApp::on_actionRead_triggered() {
 	std::vector<CompanyEntity> buffer;
 
 	if (!m_persistance_controller->fetchData(buffer))
-		return ui.statusBar->showMessage(QString("File data is incorrect!"));
+		return ui.statusBar->showMessage(QString(tr("File data is incorrect!")));
 
 	if (!std::all_of(buffer.begin(), buffer.end(), [](const auto& record) { return DataParser::validateAll(record); }))
-		return ui.statusBar->showMessage(QString("File data is incorrect!"));
+		return ui.statusBar->showMessage(QString(tr("File data is incorrect!")));
 
 	setTableData(buffer);
 	ui.statusBar->clearMessage();
+}
+
+void CompaniesCRUDRepositoryApp::on_actionPolish_triggered() {
+	retranslateGUI("pl_PL");
+}
+
+void CompaniesCRUDRepositoryApp::on_actionEnglish_triggered() {
+	retranslateGUI("en_EN");
 }

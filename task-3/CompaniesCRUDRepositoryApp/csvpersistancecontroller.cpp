@@ -1,7 +1,7 @@
 #include "csvpersistancecontroller.h"
 
 bool CSVPersistanceController::fetchData(std::vector<CompanyEntity>& buffer) {
-	const QString name = QFileDialog::getOpenFileName(nullptr, QString("Select file"), QDir::homePath(), QString("CSV (*.csv)"));
+	const QString name = QFileDialog::getOpenFileName(nullptr, QObject::tr("Select file"), QDir::homePath(), QObject::tr("CSV (*.csv)"));
 
 	if (!DataPersistor::read(name, buffer))
 		return false;
@@ -18,7 +18,7 @@ bool CSVPersistanceController::saveData(const std::vector<CompanyEntity>& data) 
 }
 
 bool CSVPersistanceController::saveDataAs(const std::vector<CompanyEntity>& data) {
-	const QString name = QFileDialog::getSaveFileName(nullptr, QString("Select file"), QDir::homePath(), QString("CSV (*.csv)"));
+	const QString name = QFileDialog::getSaveFileName(nullptr, QObject::tr("Select file"), QDir::homePath(), QObject::tr("CSV (*.csv)"));
 	if (name.isEmpty())
 		return false;
 
